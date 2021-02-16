@@ -47,7 +47,6 @@
             <version>2.3.1.RELEASE</version>
         </dependency>
 
-
         <!-- Mysql依赖 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -94,6 +93,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- quartz 定时器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
     </dependencies>
 
