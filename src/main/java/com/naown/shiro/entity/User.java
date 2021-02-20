@@ -24,9 +24,9 @@ import java.util.List;
 public class User implements Serializable {
     /** ID */
     @TableId(value = "user_id")
-    private Long userId;
+    private Long id;
 
-    /** 用户权限名 */
+    /** 用户名 */
     private String username;
 
     /** 昵称 */
@@ -52,6 +52,9 @@ public class User implements Serializable {
 
     /** 状态：1启用、0禁用 */
     private Boolean enabled;
+
+    /** 随机盐 */
+    private String salt;
 
     /** 创建者 */
     private String createBy;

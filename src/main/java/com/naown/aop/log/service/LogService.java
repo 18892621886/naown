@@ -1,6 +1,6 @@
 package com.naown.aop.log.service;
 
-import com.naown.aop.log.entity.Log;
+import com.naown.aop.entity.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**

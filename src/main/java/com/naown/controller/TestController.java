@@ -34,7 +34,9 @@ public class TestController {
     @ResponseBody
     @RequestMapping("/register")
     public String register(String username, @RequestParam(defaultValue = "123456") String password){
+        System.out.println(password);
         String salt = SaltUtils.getSalt(8);
+        System.out.println(salt);
         /** 根据密码生成MD5加随机盐的密钥，散列16次 盐必须要保存到数据库,后面解析需要用到 */
         Md5Hash md5Hash = new Md5Hash(password,salt,16);
         return md5Hash.toHex();

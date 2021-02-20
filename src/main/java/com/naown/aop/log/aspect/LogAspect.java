@@ -1,6 +1,6 @@
 package com.naown.aop.log.aspect;
 
-import com.naown.aop.log.entity.Log;
+import com.naown.aop.entity.Log;
 import com.naown.aop.log.service.impl.LogServiceImpl;
 import com.naown.utils.RequestHolder;
 import com.naown.utils.StringUtils;

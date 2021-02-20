@@ -1,4 +1,4 @@
-package com.naown.aop.log.entity;
+package com.naown.aop.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -1,7 +1,7 @@
 package com.naown.aop.log.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.naown.aop.log.entity.Log;
+import com.naown.aop.entity.Log;
 import com.naown.aop.log.mapper.LogMapper;
 import com.naown.aop.log.service.LogService;
 import com.naown.utils.StringUtils;

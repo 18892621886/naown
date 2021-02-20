@@ -9,4 +9,5 @@ import com.naown.shiro.entity.User;
  * @DATE: 2021/2/20 22:05 周六
  **/
 public interface UserMapper extends BaseMapper<User> {
+    User findByUserNameRole(String username);
 }

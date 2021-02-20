@@ -1,7 +1,7 @@
 package com.naown.aop.log.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.naown.aop.log.entity.Log;
+import com.naown.aop.entity.Log;
 
 /**
  * Mybtis-Plus Mapper
