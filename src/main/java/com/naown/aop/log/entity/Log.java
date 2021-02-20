@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
+ * 对应sys_log表
  * @USER: chenjian
  * @DATE: 2021/2/11 16:18 周四
  **/

@@ -5,19 +5,17 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
-import java.beans.Transient;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Job实体类
+ * 对应sys_quartz表
  * @USER: chenjian
  * @DATE: 2021/2/13 20:29 周六
  **/
 @Data
 @TableName("sys_quartz")
-public class QuartzJob {
+public class QuartzJob implements Serializable {
 
     /**
      * 任务调度参数key

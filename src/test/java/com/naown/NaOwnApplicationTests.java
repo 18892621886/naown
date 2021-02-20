@@ -2,6 +2,7 @@ package com.naown;
 
 import com.naown.aop.log.entity.Log;
 import com.naown.aop.log.mapper.LogMapper;
+import com.naown.utils.SaltUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +20,7 @@ class NaOwnApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(SYS_TEM_DIR);
+        System.out.println(SaltUtils.getSalt());
         //int info = logMapper.insert(new Log("INFO", System.currentTimeMillis() - (System.currentTimeMillis() + 60)));
         //System.out.println(info);
     }
