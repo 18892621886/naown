@@ -1,7 +1,7 @@
-package com.naown.aop.log.aspect;
+package com.naown.aop.aspect;
 
-import com.naown.aop.entity.Log;
-import com.naown.aop.log.service.impl.LogServiceImpl;
+import com.naown.aop.entity.LogEntity;
+import com.naown.aop.service.impl.LogServiceImpl;
 import com.naown.utils.RequestHolder;
 import com.naown.utils.StringUtils;
 import com.naown.utils.ThrowableUtil;
@@ -34,7 +34,7 @@ public class LogAspect {
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.naown.aop.log.annotation.Log)")
+    @Pointcut("@annotation(com.naown.aop.annotation.Log)")
     public void logPointcut(){}
 
     @Around("logPointcut()")
@@ -42,7 +42,7 @@ public class LogAspect {
         // 设置执行开始的时间
         currentTime.set(System.currentTimeMillis());
         // 创建log并且制定级别和执行时间
-        Log log = new Log("INFO",System.currentTimeMillis() - currentTime.get());
+        LogEntity log = new LogEntity("INFO",System.currentTimeMillis() - currentTime.get());
         // 移除刚开始存储的时间
         currentTime.remove();
         // 获得HttpServletRequest
@@ -63,7 +63,7 @@ public class LogAspect {
         // 设置执行开始的时间
         currentTime.set(System.currentTimeMillis());
         // 创建log并且制定级别和执行时间
-        Log log = new Log("ERROR",System.currentTimeMillis() - currentTime.get());
+        LogEntity log = new LogEntity("ERROR",System.currentTimeMillis() - currentTime.get());
         // 移除刚开始存储的时间
         currentTime.remove();
         // 设置Log实体类的异常详情

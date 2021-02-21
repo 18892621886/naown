@@ -4,11 +4,13 @@ import com.naown.shiro.realm.UserRealm;
 import org.apache.shiro.authc.pam.FirstSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.mgt.SessionStorageEvaluator;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +32,6 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         // 设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
-        shiroFilterFactoryBean.setLoginUrl("/");
         // 添加shiro内置过滤器
         /**
          * anon:无需认证
@@ -40,10 +41,22 @@ public class ShiroConfig {
          * role：拥有某个角色的权限才能访问
          */
         Map<String, String> filterMap = new LinkedHashMap<>();
-
+        filterMap.put("/login","anon");
+        //filterMap.put("/hello","authc");
         // 设置权限过滤器
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
+    }
+
+    /**
+     * 开启shiro注解 不然访问controller全是404 ！！！
+     * @return
+     */
+    @Bean
+    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator(){
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator=new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setUsePrefix(true);
+        return defaultAdvisorAutoProxyCreator;
     }
 
     // 安全管理器

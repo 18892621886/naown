@@ -10,12 +10,12 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 public class SaltUtils {
     /**
      * 返回随机盐
-     * @param n 返回几位的随机盐 如果为空则返回16位随机盐
+     * @param n 返回几位的随机盐 如果为空则返回8位随机盐
      * @return
      */
     public static String getSalt(Integer n){
         if (n==null || n==1){
-            return new SecureRandomNumberGenerator().nextBytes(8).toHex();
+            return new SecureRandomNumberGenerator().nextBytes(4).toHex();
         }
         Double floor = Math.floor(n / 2);
         return new SecureRandomNumberGenerator().nextBytes(floor.intValue()).toHex();

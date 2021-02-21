@@ -4,18 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import java.io.Serializable;
+
 import java.sql.Timestamp;
 
 /**
  * 对应sys_log表
  * @USER: chenjian
- * @DATE: 2021/2/11 16:18 周四
+ * @DATE: 2021/2/21 1:30 周日
  **/
 @Data
 @TableName(value = "sys_log")
-public class Log implements Serializable {
-
+public class LogEntity {
     /** logId */
     @TableId(value = "log_id",type = IdType.AUTO)
     private Long id;
@@ -58,7 +57,7 @@ public class Log implements Serializable {
      * @param logType
      * @param time
      */
-    public Log(String logType, Long time) {
+    public LogEntity(String logType, Long time) {
         this.logType = logType;
         this.time = time;
     }

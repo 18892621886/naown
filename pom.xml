@@ -107,6 +107,13 @@
             <artifactId>shiro-spring-boot-web-starter</artifactId>
             <version>1.7.1</version>
         </dependency>
+
+        <!-- 导入数据实体校验包 -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

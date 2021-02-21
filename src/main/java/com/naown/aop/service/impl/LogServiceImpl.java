@@ -1,9 +1,10 @@
-package com.naown.aop.log.service.impl;
+package com.naown.aop.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.naown.aop.entity.Log;
-import com.naown.aop.log.mapper.LogMapper;
-import com.naown.aop.log.service.LogService;
+import com.naown.aop.annotation.Log;
+import com.naown.aop.entity.LogEntity;
+import com.naown.aop.mapper.LogMapper;
+import com.naown.aop.service.LogService;
 import com.naown.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -30,13 +31,13 @@ public class LogServiceImpl implements LogService {
     private LogMapper logMapper;
 
     @Override
-    public Integer saveLog(String username, String browser, String ip, ProceedingJoinPoint joinPoint, Log log) {
+    public Integer saveLog(String username, String browser, String ip, ProceedingJoinPoint joinPoint, LogEntity log) {
         // 从切点上获取目标的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
         // 方法上获得注解所在的类和信息
-        com.naown.aop.log.annotation.Log aopLog = method.getAnnotation(com.naown.aop.log.annotation.Log.class);
+        Log aopLog = method.getAnnotation(Log.class);
 
         // 方法和路径
         String methodName = joinPoint.getTarget().getClass().getName() + '.' + signature.getName();

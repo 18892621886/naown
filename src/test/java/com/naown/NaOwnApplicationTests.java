@@ -1,9 +1,8 @@
 package com.naown;
 
-import com.naown.aop.log.mapper.LogMapper;
+import com.naown.aop.mapper.LogMapper;
 import com.naown.shiro.entity.User;
 import com.naown.shiro.mapper.UserMapper;
-import com.naown.utils.SaltUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +24,7 @@ class NaOwnApplicationTests {
     void contextLoads() {
         User admin = userMapper.findByUserNameRole("admin");
         System.out.println(admin);
-        //int info = logMapper.insert(new Log("INFO", System.currentTimeMillis() - (System.currentTimeMillis() + 60)));
+        //int info = logMapper.insert(new LogEntity("INFO", System.currentTimeMillis() - (System.currentTimeMillis() + 60)));
         //System.out.println(info);
     }
 

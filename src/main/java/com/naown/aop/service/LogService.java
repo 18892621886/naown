@@ -1,6 +1,6 @@
-package com.naown.aop.log.service;
+package com.naown.aop.service;
 
-import com.naown.aop.entity.Log;
+import com.naown.aop.entity.LogEntity;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
@@ -19,5 +19,5 @@ public interface LogService {
      * @param log 日志实体
      * @return 存储成功条数
      */
-    Integer saveLog(String username, String browser, String ip, ProceedingJoinPoint joinPoint, Log log);
+    Integer saveLog(String username, String browser, String ip, ProceedingJoinPoint joinPoint, LogEntity log);
 }

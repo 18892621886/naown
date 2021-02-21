@@ -54,7 +54,6 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("执行了认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         User user = userMapper.findByUserNameRole(token.getUsername());
         if(user == null) {
@@ -68,7 +67,7 @@ public class UserRealm extends AuthorizingRealm {
          *  }
          */
         // 参数1：用户信息，一般为用户实体类 参数2: MD5+Salt 盐值加密的字符串 参数3: 随机盐 参数4: realm的名字 方法继承至父类
-        return new SimpleAuthenticationInfo(user,token.getPassword(), ByteSource.Util.bytes(user.getSalt()),this.getName());
+        return new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(user.getSalt()),this.getName());
     }
 
     /**
