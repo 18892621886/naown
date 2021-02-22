@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @ExceptionHandler(value = Exception.class)
+    //@ExceptionHandler(value = Exception.class)
     public Result handleException(Exception e) {
         log.error("系统内部异常，异常信息为:{}", e.getMessage());
         return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"系统内部异常");
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = RuntimeException.class)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = RuntimeException.class)
     public Result runtimeHandle(RuntimeException exception){
         log.error("运行时异常:{}",exception.getMessage());
         return Result.error(exception.getMessage());
@@ -36,5 +36,4 @@ public class GlobalExceptionHandler {
         log.error("shiro异常:{}", e.getMessage());
         return Result.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
     }
-
 }

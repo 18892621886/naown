@@ -1,5 +1,6 @@
 package com.naown.shiro.config;
 
+import com.naown.shiro.cache.RedisCacheManager;
 import com.naown.shiro.realm.UserRealm;
 import org.apache.shiro.authc.pam.FirstSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
@@ -63,6 +64,7 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSecurityManager defaultWebSecurityManager(@Autowired UserRealm userRealm){
         DefaultWebSecurityManager webSecurityManager = new DefaultWebSecurityManager();
+        webSecurityManager.setCacheManager(new RedisCacheManager());
         webSecurityManager.setRealm(userRealm);
         return webSecurityManager;
     }

@@ -28,9 +28,10 @@ public class IndexController {
      * @return
      */
     @Log("功能模块")
-    @GetMapping("/Role")
-    public String Role(){
+    @RequiresRoles(value={"全部", "本级"}, logical= Logical.OR)
+    @GetMapping("/role")
+    public void role(){
+        System.out.println("测试业务");
         // 业务
-        return "";
     }
 }

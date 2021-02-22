@@ -1,13 +1,17 @@
 package com.naown.shiro.realm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.naown.shiro.cache.RedisCacheManager;
 import com.naown.shiro.entity.User;
 import com.naown.shiro.mapper.UserMapper;
+import com.naown.utils.SaltUtils;
+import com.naown.utils.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -67,7 +71,7 @@ public class UserRealm extends AuthorizingRealm {
          *  }
          */
         // 参数1：用户信息，一般为用户实体类 参数2: MD5+Salt 盐值加密的字符串 参数3: 随机盐 参数4: realm的名字 方法继承至父类
-        return new SimpleAuthenticationInfo(user,user.getPassword(), ByteSource.Util.bytes(user.getSalt()),this.getName());
+        return new SimpleAuthenticationInfo(user,user.getPassword(), new SaltUtils(user.getSalt()),this.getName());
     }
 
     /**
@@ -78,8 +82,8 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
-        hashedCredentialsMatcher.setHashIterations(16);
+        hashedCredentialsMatcher.setHashAlgorithmName(ShiroUtils.HASH_ALGORITHM_NAME);
+        hashedCredentialsMatcher.setHashIterations(ShiroUtils.HASH_ITERATIONS);
         super.setCredentialsMatcher(hashedCredentialsMatcher);
     }
 }

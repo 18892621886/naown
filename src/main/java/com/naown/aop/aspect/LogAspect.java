@@ -3,9 +3,11 @@ package com.naown.aop.aspect;
 import com.naown.aop.entity.LogEntity;
 import com.naown.aop.service.impl.LogServiceImpl;
 import com.naown.utils.RequestHolder;
+import com.naown.utils.ShiroUtils;
 import com.naown.utils.StringUtils;
 import com.naown.utils.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -48,7 +50,7 @@ public class LogAspect {
         // 获得HttpServletRequest
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         // 使用mybatis-plus进行存储
-        logService.saveLog("后续使用shiro获取", StringUtils.getBrowser(request),StringUtils.getIp(request),joinPoint,log);
+        logService.saveLog(getUsername(), StringUtils.getBrowser(request),StringUtils.getIp(request),joinPoint,log);
         return joinPoint.proceed();
     }
 
@@ -71,6 +73,14 @@ public class LogAspect {
         // 获得HttpServletRequest
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         // 使用mybatis-plus进行存储
-        logService.saveLog("后续使用shiro获取", StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint)joinPoint, log);
+        logService.saveLog(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request), (ProceedingJoinPoint)joinPoint, log);
+    }
+
+    public String getUsername() {
+        try {
+            return ShiroUtils.getCurrentUsername();
+        }catch (Exception e){
+            return "";
+        }
     }
 }

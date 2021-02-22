@@ -9,6 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @USER: chenjian
  * @DATE: 2021/2/11 21:46 周四
  **/
-@Mapper
 public interface LogMapper extends BaseMapper<LogEntity> {
 }

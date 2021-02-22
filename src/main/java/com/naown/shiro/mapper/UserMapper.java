@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @USER: chenjian
  * @DATE: 2021/2/20 22:05 周六
  **/
-@Mapper
 public interface UserMapper extends BaseMapper<User> {
     User findByUserNameRole(String username);
 }

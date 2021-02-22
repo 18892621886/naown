@@ -9,6 +9,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @USER: chenjian
  * @DATE: 2021/2/14 0:57 周日
  **/
-@Mapper
 public interface QuartzMapper extends BaseMapper<QuartzJob> {
 }

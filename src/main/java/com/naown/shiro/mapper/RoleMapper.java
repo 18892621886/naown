@@ -8,6 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @USER: chenjian
  * @DATE: 2021/2/20 22:24 周六
  **/
-@Mapper
 public interface RoleMapper extends BaseMapper<Role> {
 }

@@ -3,6 +3,7 @@ package com.naown.controller;
 import com.naown.aop.annotation.Log;
 import com.naown.shiro.dto.LoginDTO;
 import com.naown.utils.SaltUtils;
+import com.naown.utils.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -45,7 +46,18 @@ public class TestController {
     @Log("登录日志")
     @PostMapping("/login")
     public String login(@Validated @RequestBody LoginDTO loginDTO){
-        SecurityUtils.getSubject().login(new UsernamePasswordToken(loginDTO.getUsername(),loginDTO.getPassword()));
+        ShiroUtils.getSubject().login(new UsernamePasswordToken(loginDTO.getUsername(),loginDTO.getPassword()));
+        return "200";
+    }
+
+    /**
+     * 假设这是退出
+     * @return
+     */
+    @Log("退出日志")
+    @PostMapping("/logout")
+    public String logout(){
+        SecurityUtils.getSubject().logout();
         return "200";
     }
 
