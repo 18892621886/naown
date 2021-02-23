@@ -56,7 +56,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveJob(QuartzJob quartzJob) {
         if (quartzMapper.insert(quartzJob) != 1) {
             throw new PersistenceException("添加失败");
@@ -65,7 +65,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateJob(QuartzJob quartzJob) {
         if (quartzMapper.updateById(quartzJob) != 1) {
             throw new PersistenceException("更新失败");
@@ -74,7 +74,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void deleteJobById(Long jobId) {
         ScheduleUtils.deleteScheduleJob(scheduler, jobId);
         if (quartzMapper.deleteById(jobId) != 1) {
@@ -88,9 +88,9 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateJobStatusById(QuartzJob quartzJob, Boolean status) {
-        if (quartzJob.getStatus() == status){
+        if (quartzJob.getStatus().equals(status)){
             throw new PersistenceException("修改失败,Job状态冲突，不能给已经启动或停止的任务再修改同样的状态");
         }
         if (status) {
@@ -107,6 +107,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public List<QuartzJob> getJobLogListByDate(String startDate, String endDate) {
+        // 暂未用到未实现
        /* return scheduleJobLogMapper.getJobLogListByDate(startDate, endDate);*/
         return null;
     }
@@ -115,15 +116,18 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     @Transactional(rollbackFor = Exception.class)
     public void pause(Long jobId) {
         ScheduleUtils.pauseJob(scheduler, jobId);
-
-        // TODO 更新进数据库
+        QuartzJob quartzJob = quartzMapper.selectById(jobId);
+        quartzJob.setStatus(!quartzJob.getStatus());
+        quartzMapper.updateById(quartzJob);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void resume(Long jobId) {
         ScheduleUtils.resumeJob(scheduler, jobId);
-        // TODO 更新进数据库
+        QuartzJob quartzJob = quartzMapper.selectById(jobId);
+        quartzJob.setStatus(!quartzJob.getStatus());
+        quartzMapper.updateById(quartzJob);
     }
 
     @Override

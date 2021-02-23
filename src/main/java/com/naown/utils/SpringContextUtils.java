@@ -21,11 +21,30 @@ public class SpringContextUtils implements ApplicationContextAware {
 	}
 
 	public static Object getBean(String name) {
+		assertContextInjected();
 		return applicationContext.getBean(name);
 	}
 
+	/**
+	 * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
+	 */
+	public static <T> T getBean(Class<T> requiredType) {
+		assertContextInjected();
+		return applicationContext.getBean(requiredType);
+	}
+
 	public static <T> T getBean(String name, Class<T> requiredType) {
+		assertContextInjected();
 		return applicationContext.getBean(name, requiredType);
+	}
+	/**
+	 * 检查ApplicationContext不为空.
+	 */
+	private static void assertContextInjected() {
+		if (applicationContext == null) {
+			throw new IllegalStateException("applicaitonContext属性未注入, 请在applicationContext" +
+					".xml中定义SpringContextHolder或在SpringBoot启动类中注册SpringContextHolder.");
+		}
 	}
 
 	public static boolean containsBean(String name) {

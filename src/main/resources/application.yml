@@ -64,3 +64,14 @@ logging:
     com.naown.shiro.mapper: debug
 server:
   port: 8081
+#自定义线程
+task:
+  pool:
+    # 核心线程池大小
+    core-pool-size: 10
+    # 最大线程数
+    max-pool-size: 30
+    # 活跃时间
+    keep-alive-seconds: 60
+    # 队列容量
+    queue-capacity: 50

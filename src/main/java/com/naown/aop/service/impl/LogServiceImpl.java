@@ -46,9 +46,6 @@ public class LogServiceImpl implements LogService {
             log.setDescription(aopLog.value());
         }
 
-        //TODO 此处的断言如果为false会抛出异常，后续替换或者封装全局异常拦截
-        assert log != null;
-
         // 设置访问者的IP
         log.setRequestIp(ip);
         // 设置访问者的地址

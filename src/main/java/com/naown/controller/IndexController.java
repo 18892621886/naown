@@ -1,11 +1,13 @@
 package com.naown.controller;
 
 import com.naown.aop.annotation.Log;
+import com.naown.quartz.service.ScheduleJobService;
 import com.naown.utils.SaltUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,10 +16,28 @@ import org.springframework.web.bind.annotation.*;
  **/
 @RestController
 public class IndexController {
+
+    @Autowired
+    ScheduleJobService scheduleJobService;
+
     @GetMapping("test")
     @RequiresAuthentication
     public String test(){
         return "测试";
+    }
+
+    @Log("暂停线程")
+    @GetMapping("pause")
+    public String pause(){
+        scheduleJobService.pause(1L);
+        return "暂停线程";
+    }
+
+    @Log("恢复线程")
+    @GetMapping("resume")
+    public String resume(){
+        scheduleJobService.resume(1L);
+        return "恢复线程";
     }
 
 

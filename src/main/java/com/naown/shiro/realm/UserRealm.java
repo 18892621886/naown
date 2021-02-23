@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.naown.shiro.cache.RedisCacheManager;
 import com.naown.shiro.entity.User;
 import com.naown.shiro.mapper.UserMapper;
+import com.naown.shiro.service.UserService;
 import com.naown.utils.SaltUtils;
 import com.naown.utils.ShiroUtils;
 import org.apache.shiro.authc.*;
@@ -30,9 +31,8 @@ import java.util.Set;
 @Component
 public class UserRealm extends AuthorizingRealm {
 
-    // TODO 后续替换成service
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
     /**
      * 授权
      * @param principalCollection
@@ -59,7 +59,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        User user = userMapper.findByUserNameRole(token.getUsername());
+        User user = userService.findByUserNameRole(token.getUsername());
         if(user == null) {
             throw new UnknownAccountException("账号或密码不正确");
         }

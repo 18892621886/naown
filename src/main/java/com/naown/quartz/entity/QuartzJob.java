@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 /**
  * 对应sys_quartz表
- * @USER: chenjian
+ * @author chenjian
  * @DATE: 2021/2/13 20:29 周六
  **/
 @Data
