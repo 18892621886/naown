@@ -1,28 +1,19 @@
 package com.naown.shiro.realm;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.naown.shiro.cache.RedisCacheManager;
 import com.naown.shiro.entity.User;
-import com.naown.shiro.mapper.UserMapper;
-import com.naown.shiro.service.UserService;
 import com.naown.utils.SaltUtils;
+import com.naown.shiro.service.UserService;
 import com.naown.utils.ShiroUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * @USER: chenjian

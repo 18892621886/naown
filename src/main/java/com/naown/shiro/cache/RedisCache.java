@@ -36,7 +36,6 @@ public class RedisCache<K,V> implements Cache<K,V> {
 
     @Override
     public V get(K k) throws CacheException {
-        //log.info("get-> key:"+k);
         /**
          * 获取当前缓存的名字的K
          */
@@ -50,7 +49,6 @@ public class RedisCache<K,V> implements Cache<K,V> {
          */
         this.getRedisTemplate().opsForHash().put(this.cacheName,k.toString(),v);
         this.getRedisTemplate().expire(this.cacheName,5, TimeUnit.HOURS);
-        //log.info("put-> key:"+k + "value:"+v);
         return null;
     }
 
